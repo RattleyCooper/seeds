@@ -5,7 +5,6 @@
 
 `nimble install https://github.com/RattleyCooper/seeds`
 
-
 ## Seed RNGs with Vector Hashes
 
 When making procedurally generated games you might want to place things in the world that you cannot determine using the height map from perlin noise. Objects like plants, enemy or animal spawn points are usually decided using something other than perlin noise, and some games result to pre-baking this information during initial world-generation, usually with a fairly limited world-size that does not expand beyond the initial world generation.
