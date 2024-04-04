@@ -7,8 +7,8 @@ const ms = int32.high div prime^2  # 238_609_294
 const maxSize* = (low: -ms, high: ms)
 var seed*: int = 0
 
-proc uniqueSeed*(v: IVec2): int {.inline.} =
-  # Generate a unique integer to use as a seed for
+proc hash*(v: IVec2): int {.inline.} =
+  # Generate a hash integer to use as a seed for
   # a random number generator.
 
   if v.x < v.y:
@@ -19,7 +19,7 @@ proc uniqueSeed*(v: IVec2): int {.inline.} =
 proc initRand*(v: IVec2): Rand =
   # Initialize a RNG with vector-based seed.
 
-  initRand(seed + v.uniqueSeed)
+  initRand(seed + v.hash)
 
 template roll*[T](r: var Rand, h: T): T =
   r.rand(h)
@@ -46,10 +46,10 @@ if isMainModule:
   let v3 = ivec2(0, 10)
   let v4 = ivec2(10, 0)
 
-  echo $v1.uniqueSeed() # -59
-  echo $v2.uniqueSeed() # -60
-  echo $v3.uniqueSeed() # 31
-  echo $v4.uniqueSeed() # 30
+  echo $v1.hash() # -59
+  echo $v2.hash() # -60
+  echo $v3.hash() # 31
+  echo $v4.hash() # 30
 
   var r1 = v1.initRand()
   var r2 = v2.initRand()
