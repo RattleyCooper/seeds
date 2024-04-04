@@ -18,16 +18,20 @@ let v2 = ivec2(10, -10)
 let v3 = ivec2(0, 10)
 let v4 = ivec2(10, 0)
 
+# Get the unique seed int for the vector
 echo $v1.uniqueSeed() # -59
 echo $v2.uniqueSeed() # -60
 echo $v3.uniqueSeed() # 31
 echo $v4.uniqueSeed() # 30
 
+# Get Rand instances from vectors
 var r1 = v1.initRand()
 var r2 = v2.initRand()
 var r3 = v3.initRand()
 var r4 = v4.initRand()
 
+# Get random numbers, roll, and reaches
+# available for IVec2 and Rand.
 echo $r1.rand(1.0) # 0.5496076515946029
 echo $v1.roll(1.0) # 0.5496076515946029
 echo $v1.reaches(0.54) # true
