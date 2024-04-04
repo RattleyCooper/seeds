@@ -5,8 +5,6 @@ var seed*: int = 0
 var prime* = 3
 var expander* = 997
 
-let ms = int32.high div prime^2  # 238_609_294
-let maxSize* = (low: -ms, high: ms)
 
 proc hash*(v: IVec2): int {.inline.} =
   # Generate a hash integer to use as a seed for
