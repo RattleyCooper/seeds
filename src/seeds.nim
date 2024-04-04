@@ -1,14 +1,13 @@
 import vmath
 import random
 
-
 const prime = 3
 const ms = int32.high div prime^2  # 238_609_294
 
 const maxSize* = (low: -ms, high: ms)
 var seed*: int = 0
 
-proc uniqueSeed*(v: IVec2): int =
+proc uniqueSeed*(v: IVec2): int {.inline.} =
   # Generate a unique integer to use as a seed for
   # a random number generator.
 
@@ -29,12 +28,12 @@ template roll*[T](v: IVec2, h: T): T =
   var r = v.initRand()
   r.rand(h)
 
-proc reaches*(r: var Rand, target: range[0.0 .. 1.0]): bool =
+proc reaches*(r: var Rand, target: range[0.0 .. 1.0]): bool {.inline.} =
   # Check if a roll reaches the target value.
 
   r.roll(1.0) >= target
 
-proc reaches*(v: IVec2, target: range[0.0 .. 1.0]): bool =
+proc reaches*(v: IVec2, target: range[0.0 .. 1.0]): bool {.inline.} =
   # Check if a roll reaches the target value.
 
   v.roll(1.0) >= target
