@@ -4,14 +4,14 @@ when defined(debug):
   import timeouts
 
 var seed*: int = 0
-var prime* = 3
-var expander* = 997
+var primex* = 3
+var primey* = 997
 
 proc hash*(v: IVec2): int {.inline.} =
   # Generate a hash integer to use as a seed for
   # a random number generator.
-  
-  (prime * v.x) + (expander * v.y)
+
+  (primex * v.x) + (primey * v.y) + 1
 
 proc initRand*[T: IVec2 or UVec2](v: T): Rand =
   # Initialize a RNG with vector-based seed.
