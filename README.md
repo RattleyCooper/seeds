@@ -1,6 +1,13 @@
 # seeds
  RNG with unique vector-based seeds for deterministic procedural generation.
 
+## Install
+
+`nimble install https://github.com/RattleyCooper/seeds`
+
+
+## Seed RNGs with Vector Hashes
+
 When making procedurally generated games you might want to place things in the world that you cannot determine using the height map from perlin noise. Objects like plants, enemy or animal spawn points are usually decided using something other than perlin noise, and some games result to pre-baking this information during initial world-generation, usually with a fairly limited world-size that does not expand beyond the initial world generation.
 
 `seeds` provides a fast/deterministic way to place objects in a game world capable of expanding upon exploration. Seeds runs a hashing function on a vector and uses the result as a seed for a Random Number Generator. When you do a random number check with the seeded RNG instance it will always return the same result for the given vector.
