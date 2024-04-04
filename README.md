@@ -1,9 +1,9 @@
 # seeds
  RNG with unique vector-based seeds for deterministic procedural generation.
 
-When making procedurally generated games you might want to place things in the world that you cannot determine using the height map from perlin noise. Objects like plants, enemy or animal spawn points are usually decided using another method, and some games result to pre-baking this information during initial world-generation, usually with a fairly limited world-size that does not expand beyond the initial world generation.
+When making procedurally generated games you might want to place things in the world that you cannot determine using the height map from perlin noise. Objects like plants, enemy or animal spawn points are usually decided using something other than perlin noise, and some games result to pre-baking this information during initial world-generation, usually with a fairly limited world-size that does not expand beyond the initial world generation.
 
-`seeds` provides a fast/deterministic way to place objects in a game world. Seeds creates an RNG with a seed that's unique to a vector so that when you do a random number check it will always be the same result for the vector's value (so long as you reset the RNG before rolling the number).
+`seeds` provides a fast/deterministic way to place objects in a game world capable of expanding upon exploration. Seeds runs a hashing function on a vector and uses the result as a seed for a Random Number Generator. When you do a random number check with the seeded RNG instance it will always return the same result for the given vector.
 
 ## Example
 
@@ -19,10 +19,10 @@ let v3 = ivec2(0, 10)
 let v4 = ivec2(10, 0)
 
 # Get the unique seed int for the vector
-echo $v1.uniqueSeed() # -59
-echo $v2.uniqueSeed() # -60
-echo $v3.uniqueSeed() # 31
-echo $v4.uniqueSeed() # 30
+echo $v1.hash() # -59
+echo $v2.hash() # -60
+echo $v3.hash() # 31
+echo $v4.hash() # 30
 
 # Get Rand instances from vectors
 var r1 = v1.initRand()
