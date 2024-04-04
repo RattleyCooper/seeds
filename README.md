@@ -59,4 +59,4 @@ echo $r4.rand(1.0) # 0.1037782474596014
 
 # Hash Collisions
 
-There are hash collisions. This isn't meant to produce a unique hash for every single vector, but it does provide a pretty good distribution from my tests. I tested 2 million unique vectors and there were 3992 collisions, so roughly 0.4%. Perfectly acceptable for this use case.
+There are hash collisions. This isn't meant to produce a unique hash for every single vector, but it does provide a pretty good distribution from my tests. I tested 1 million unique vectors and there were 1491 collisions, so roughly 0.15%. More than acceptable for this use case.
