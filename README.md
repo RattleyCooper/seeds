@@ -17,33 +17,44 @@ When making procedurally generated games you might want to place things in the w
 import vmath
 import seeds
 
-seed = 9
+# Set the seed for our game world.
+# This should not change after being set.
+seeds.seed = 9
+
 let v1 = ivec2(-10, 10)
 let v2 = ivec2(10, -10)
 let v3 = ivec2(0, 10)
 let v4 = ivec2(10, 0)
 
+# Get a vector's hash
 echo $v1.hash() # 9940
 echo $v2.hash() # -9940
 echo $v3.hash() # 9970
 echo $v4.hash() # 30
 
+# Saturation is the initial random number
+# between 0.0 and 1.0, that a vector's
+# seed will produce when used with 
+# a random number generator. The
+# saturation procedure does this for
+# you.
+echo $v1.saturation
+echo $v1.saturation
+
 assert v1.hash != v2.hash
 assert v3.hash != v4.hash
 
+# Create a Rand instance from IVec2
 var r1 = v1.initRand()
 var r2 = v2.initRand()
 var r3 = v3.initRand()
 var r4 = v4.initRand()
 
+# Use the RNG
 echo $r1.rand(1.0) # 0.4025111290151007
 echo $r2.rand(1.0) # 0.9283733660063962
 echo $r3.rand(1.0) # 0.8522231909071714
 echo $r4.rand(1.0) # 0.1037782474596014
-
-let t1 = ivec2(-9999, -4983)
-let t2 = ivec2(-4983, -9999)
-assert t1.hash != t2.hash
 ```
 
 # Hash Collisions
