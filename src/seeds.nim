@@ -3,20 +3,34 @@ import random
 when defined(debug):
   import timeouts
 
-var seed*: int = 0
+const seedPrime = 3
+var seed*: int = 3
 var primex* = 3
 var primey* = 997
+
+proc hash*(x: int, y: int): int {.inline.} =
+  # Generate a hash integer to use as a seed for
+  # a random number generator.
+
+  (primex * x) + (primey * y) + 1
+
+proc hash*(d: (int, int)): int {.inline.} =
+  # Generate a hash integer to use as a seed for
+  # a random number generator.
+
+  (primex * d[0]) + (primey * d[1]) + 1
+
 
 proc hash*(v: IVec2): int {.inline.} =
   # Generate a hash integer to use as a seed for
   # a random number generator.
 
-  (primex * v.x) + (primey * v.y) + 1
+  hash(v.x, v.y)
 
 proc initRand*[T: IVec2 or UVec2](v: T): Rand =
   # Initialize a RNG with vector-based seed.
 
-  initRand(seed + v.hash)
+  initRand((seed * seedPrime) + v.hash)
 
 proc roll*[T](r: var Rand, h: T): T =
   # Same as rand
