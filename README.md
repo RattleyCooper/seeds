@@ -27,10 +27,10 @@ let v3 = ivec2(0, 10)
 let v4 = ivec2(10, 0)
 
 # Get a vector's hash
-echo $v1.hash() # 9940
-echo $v2.hash() # -9940
-echo $v3.hash() # 9970
-echo $v4.hash() # 30
+echo $v1.hash()
+echo $v2.hash()
+echo $v3.hash()
+echo $v4.hash()
 
 # Saturation is the initial random number
 # between 0.0 and 1.0, that a vector's
@@ -51,10 +51,10 @@ var r3 = v3.initRand()
 var r4 = v4.initRand()
 
 # Use the RNG
-echo $r1.rand(1.0) # 0.4025111290151007
-echo $r2.rand(1.0) # 0.9283733660063962
-echo $r3.rand(1.0) # 0.8522231909071714
-echo $r4.rand(1.0) # 0.1037782474596014
+echo $r1.rand(1.0)
+echo $r2.rand(1.0)
+echo $r3.rand(1.0)
+echo $r4.rand(1.0)
 ```
 
 # Hash Collisions
