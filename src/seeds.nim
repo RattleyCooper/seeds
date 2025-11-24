@@ -1,6 +1,7 @@
 import vmath
 import random
 when defined(debug):
+  import pixie
   import timeouts
 
 const seedPrime = 3
@@ -62,10 +63,10 @@ if isMainModule:
   let v3 = ivec2(0, 10)
   let v4 = ivec2(10, 0)
 
-  echo $v1.hash() # 9940
-  echo $v2.hash() # -9940
-  echo $v3.hash() # 9970
-  echo $v4.hash() # 30
+  echo $v1.hash()
+  echo $v2.hash()
+  echo $v3.hash()
+  echo $v4.hash()
 
   assert v1.hash != v2.hash
   assert v3.hash != v4.hash
@@ -75,16 +76,26 @@ if isMainModule:
   var r3 = v3.initRand()
   var r4 = v4.initRand()
 
-  echo $r1.rand(1.0) # 0.4025111290151007
-  echo $r2.rand(1.0) # 0.9283733660063962
-  echo $r3.rand(1.0) # 0.8522231909071714
-  echo $r4.rand(1.0) # 0.1037782474596014
+  echo $r1.rand(1.0)
+  echo $r2.rand(1.0)
+  echo $r3.rand(1.0)
+  echo $r4.rand(1.0)
 
   let t1 = ivec2(-9999, -4983)
   let t2 = ivec2(-4983, -9999)
   assert t1.hash != t2.hash
 
   when defined(debug):
+    let (w, h) = (1000, 1000)
+    let scale = 8f32
+    let (ix, iy) = (w*scale.int, h*scale.int)
+
+    let img = newImage(ix, iy)
+    let c = newContext(img)
+    let c2 = newContext(img)
+    c.fillStyle = rgba(255, 0, 0, 255)
+    c2.fillStyle = rgba(0, 0, 0, 255)
+    
     proc countCollisions() =
       var l: seq[int]
       var collisions: seq[int]
@@ -94,28 +105,27 @@ if isMainModule:
         echo "Collisions: ", $collisions.len
 
       block top:
-        for x in -500..500:
-          for y in 501..1500:
-            if x == y: continue
-            checks += 2
+        for x in (0 - w div 2)..(w div 2):
+          for y in (0 - h div 2)..(h div 2):
+            var v = ivec2(x.int32, y.int32)
+            
+            if v.saturation > 0.98:
+              c.fillRect(rect(x.float32 * scale, y.float32 * scale, scale, scale))
+            else:
+              c2.fillRect(rect(x.float32 * scale, y.float32 * scale, scale, scale))
+            checks += 1
             var v1 = ivec2(x.int32, y.int32)
-            var v2 = ivec2(y.int32, x.int32)
             let h1 = v1.hash
-            let h2 = v2.hash
 
             if l.contains(h1):
               collisions.add h1
-            if l.contains(h2):
-              collisions.add h2
-
-            if h1 != h2:
-              l.add h1
-              l.add h2
             else:
-              collisions.add h1
+              l.add h1
             
           clock.tick()
 
       echo $collisions.len
     
     countCollisions()
+
+    img.writeFile("../examples/saturation.png")
