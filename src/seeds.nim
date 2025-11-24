@@ -5,21 +5,24 @@ when defined(debug):
 
 const seedPrime = 3
 var seed*: int = 3
-var primex* = 3
-var primey* = 997
+var primex* = 73856093
+var primey* = 19349663
 
 proc hash*(x: int, y: int): int {.inline.} =
   # Generate a hash integer to use as a seed for
   # a random number generator.
 
-  (primex * x) + (primey * y) + 1
+  let h1 = primex * x
+  let h2 = primey * y
+  (h1 xor (h2 shl 16)) or 1
 
 proc hash*(d: (int, int)): int {.inline.} =
   # Generate a hash integer to use as a seed for
   # a random number generator.
 
-  (primex * d[0]) + (primey * d[1]) + 1
-
+  let h1 = primex * d[0]
+  let h2 = primey * d[1]
+  (h1 xor (h2 shl 16)) or 1
 
 proc hash*(v: IVec2): int {.inline.} =
   # Generate a hash integer to use as a seed for
