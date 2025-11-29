@@ -28,9 +28,7 @@ Developers often resort to **pre-baked world data**, limiting world size and pre
 
 ## 📦 Install
 
-```bash
-nimble install https://github.com/RattleyCooper/seeds
-```
+`nimble install https://github.com/RattleyCooper/seeds`
 
 ## 🧬 Usage Example
 
